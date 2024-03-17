@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "21fe35e4-f43d-48ee-a3c6-78f1197d86b0",
+		"name": "Recipes Application",
+		"description": "FavouriteRecipes is a microservice application designed to manage the favourite recipes of the user. with the help of this microservice we have exposed REST API's which will allow the user to add, update, fetch, delete and also search the recipes based on mutiple search parameters.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"jwtToken\",jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true,
+					"user-agent": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"recipesadmin\",\n    \"password\":\"recipesadmin123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assignment/favourites/v1/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assignment",
+						"favourites",
+						"v1",
+						"authenticate"
+					]
+				},
+				"description": "This API is used to return JWT token in response based on username and password"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Recipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZWNpcGVzYWRtaW4iLCJpYXQiOjE2NTgxNjYxNDksImV4cCI6MTY1ODM0NjE0OX0.K9xOGOzVYSO7myuAPoXOfMQdSKTjz0E_Kwg4-Co8X0k",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"vegetarian\",\n    \"name\": \"palak panner\",\n    \"servings\": 10,\n    \"ingredients\": [\n        \"salt\",\n        \"pepper\",\n        \"chilli powder\"\n    ],\n    \"instructions\": [\n        \"cook in oven\",\n        \"dep fry\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assignment/favourites/v1/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assignment",
+						"favourites",
+						"v1",
+						"recipes"
+					]
+				},
+				"description": "This API is used to add new recipe and will return recipe id in location response header"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Recipe",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZWNpcGVzYWRtaW4iLCJpYXQiOjE2NTgxNjYxNDksImV4cCI6MTY1ODM0NjE0OX0.K9xOGOzVYSO7myuAPoXOfMQdSKTjz0E_Kwg4-Co8X0k",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assignment/favourites/v1/recipes/a37d3c7d-37c4-471b-839c-2bbf01d79277",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assignment",
+						"favourites",
+						"v1",
+						"recipes",
+						"a37d3c7d-37c4-471b-839c-2bbf01d79277"
+					]
+				},
+				"description": "This API is used to fetch recipe based on recipe Id"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove recipe",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZWNpcGVzYWRtaW4iLCJpYXQiOjE2NTgxNjYxNDksImV4cCI6MTY1ODM0NjE0OX0.K9xOGOzVYSO7myuAPoXOfMQdSKTjz0E_Kwg4-Co8X0k",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assignment/favourites/v1/recipes/e3ae6fcd-2acc-49c1-96a8-cf88892faad5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assignment",
+						"favourites",
+						"v1",
+						"recipes",
+						"e3ae6fcd-2acc-49c1-96a8-cf88892faad5"
+					]
+				},
+				"description": "This API is used to remove recipe based on recipe id"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Recipe",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"vegetarian\",\n    \"name\": \"any name\",\n    \"servings\": 5,\n    \"ingredients\": [\n        \"salt\",\n        \"pepper\",\n        \"chilli powder\"\n    ],\n    \"instructions\": [\n        \"left\",\n        \"right\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assignment/favourites/v1/recipes/1139ffd0-b8d9-4a31-8d55-9fa0323498e1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assignment",
+						"favourites",
+						"v1",
+						"recipes",
+						"1139ffd0-b8d9-4a31-8d55-9fa0323498e1"
+					]
+				},
+				"description": "This API is used to update recipe based on recipe id"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Recipes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"vegetarian\",\n    \"name\": \"panner curry\",\n    \"servings\": 2,\n    \"ingredients\": [\n        \"salt\",\n        \"pepper\"\n    ],\n    \"instructions\": [\n        \"left\",\n        \"right\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assignment/favourites/v1/recipes?type=vegetarian&servings=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assignment",
+						"favourites",
+						"v1",
+						"recipes"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "vegetarian"
+						},
+						{
+							"key": "servings",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
