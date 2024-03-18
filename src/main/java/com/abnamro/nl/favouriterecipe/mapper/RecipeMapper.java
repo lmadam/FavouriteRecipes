@@ -10,8 +10,7 @@ import org.mapstruct.factory.Mappers;
 public interface RecipeMapper {
 	
 	RecipeMapper INSTANCE = Mappers.getMapper(RecipeMapper.class);
-	
-	RecipesEntity fromRecipesRequest(RecipesRequest recipesRequest);
-	RecipesRequest toRecipesRequest(RecipesEntity recipesEntity);
+
+	RecipesEntity toRecipesEntity(RecipesRequest recipesRequest);
 
 }

@@ -1,5 +1,6 @@
 package com.abnamro.nl.favouriterecipe.repository;
 
+import com.abnamro.nl.favouriterecipe.constants.RecipesConstants;
 import com.abnamro.nl.favouriterecipe.entity.RecipesEntity;
 import com.abnamro.nl.favouriterecipe.enums.RecipesErrorEnum;
 import com.abnamro.nl.favouriterecipe.exception.RecipesException;
@@ -38,26 +39,26 @@ public class RecipesCustomRepositoryImpl implements RecipesCustomRepository{
 			
 			Query query = new Query();
 			
-			if(StringUtils.isNotBlank(queryParams.get("name"))) {
-				query.addCriteria(Criteria.where("name").is(queryParams.get("name")));
+			if(StringUtils.isNotBlank(queryParams.get(RecipesConstants.NAME))) {
+				query.addCriteria(Criteria.where(RecipesConstants.NAME).is(queryParams.get(RecipesConstants.NAME)));
 			}
 			
-			if(StringUtils.isNotBlank(queryParams.get("type"))) {
-				query.addCriteria(Criteria.where("type").is(queryParams.get("type")));
+			if(StringUtils.isNotBlank(queryParams.get(RecipesConstants.TYPE))) {
+				query.addCriteria(Criteria.where(RecipesConstants.TYPE).is(queryParams.get(RecipesConstants.TYPE)));
 			}
 			
-			if(StringUtils.isNotBlank(queryParams.get("ingredient"))) {
-				query.addCriteria(StringUtils.isNotBlank(queryParams.get("includeIngredient")) 
-						&& "N".equalsIgnoreCase(queryParams.get("includeIngredient")) ? Criteria.where("ingredients").nin(queryParams.get("ingredient")) 
-								:  Criteria.where("ingredients").in(queryParams.get("ingredient")) );
+			if(StringUtils.isNotBlank(queryParams.get(RecipesConstants.INGREDIENT))) {
+				query.addCriteria(StringUtils.isNotBlank(queryParams.get(RecipesConstants.INCLUDE_INGREDIENT))
+						&& "N".equalsIgnoreCase(queryParams.get(RecipesConstants.INCLUDE_INGREDIENT)) ? Criteria.where(RecipesConstants.INGREDIENTS).nin(queryParams.get(RecipesConstants.INGREDIENT))
+								:  Criteria.where(RecipesConstants.INGREDIENTS).in(queryParams.get(RecipesConstants.INGREDIENT)) );
 			}
 			
-			if(StringUtils.isNotBlank(queryParams.get("instruction"))) {
-				query.addCriteria(Criteria.where("instructions").regex(queryParams.get("instruction")) );
+			if(StringUtils.isNotBlank(queryParams.get(RecipesConstants.INSTRUCTION))) {
+				query.addCriteria(Criteria.where(RecipesConstants.INSTRUCTIONS).regex(queryParams.get(RecipesConstants.INSTRUCTION)) );
 			}
 			
-			if(StringUtils.isNotBlank(queryParams.get("servings"))) {
-				query.addCriteria(Criteria.where("servings").is(Integer.valueOf(queryParams.get("servings"))));
+			if(StringUtils.isNotBlank(queryParams.get(RecipesConstants.SERVINGS))) {
+				query.addCriteria(Criteria.where(RecipesConstants.SERVINGS).is(Integer.valueOf(queryParams.get(RecipesConstants.SERVINGS))));
 			}
 			
 			recipes = mongoTemplate.find(query, RecipesEntity.class);

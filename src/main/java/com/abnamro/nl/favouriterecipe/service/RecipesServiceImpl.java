@@ -40,7 +40,7 @@ public class RecipesServiceImpl implements RecipesService {
 	public RecipesEntity addRecipe(RecipesRequest request) {
 		log.info("Add recipe request initiated for recipe type :: {} and name :: {}", request.type(),
 				request.name());
-		var entity = recipeMapper.fromRecipesRequest(request);
+		var entity = recipeMapper.toRecipesEntity(request);
 		entity.setId(RecipesUtility.generateRecipeId());
 		entity.setCreatedDate(LocalDateTime.now());
 		return recipesRepository.save(entity);
@@ -51,7 +51,7 @@ public class RecipesServiceImpl implements RecipesService {
 		log.info("Recipe update requested for recipe id :: {}", id);
 		var recipe = recipesRepository.findById(id);
 		if (recipe.isPresent()) {
-			var entity = recipeMapper.fromRecipesRequest(request);
+			var entity = recipeMapper.toRecipesEntity(request);
 			entity.setId(recipe.get().getId());
 			entity.setCreatedDate(recipe.get().getCreatedDate());
 			entity.setUpdatedDate(LocalDateTime.now());

@@ -69,7 +69,7 @@ public class RecipesServiceImplTest {
 		
 		Optional<RecipesEntity> entity = Optional.of(recipesEntity);
 		
-		Mockito.when(recipeMapper.fromRecipesRequest(recipesRequest)).thenReturn(recipesEntity);
+		Mockito.when(recipeMapper.toRecipesEntity(recipesRequest)).thenReturn(recipesEntity);
 		
 		Mockito.when(recipesRepository.save(entity.get())).thenReturn(entity.get());
 		
@@ -133,7 +133,7 @@ public class RecipesServiceImplTest {
 		
 		Optional<RecipesEntity> entity = Optional.of(recipesEntity);
 		
-		Mockito.when(recipeMapper.fromRecipesRequest(recipesRequest)).thenReturn(recipesEntity);
+		Mockito.when(recipeMapper.toRecipesEntity(recipesRequest)).thenReturn(recipesEntity);
 		
 		Mockito.when(recipesRepository.findById(recipeId)).thenReturn(entity);
 		
